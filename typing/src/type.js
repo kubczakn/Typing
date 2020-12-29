@@ -5,6 +5,7 @@ class TypeText extends Component {
         super(props);
         this.state = {
             words: "Sample",
+            words_color: 'black',
             value: ""
         };
 
@@ -14,7 +15,13 @@ class TypeText extends Component {
 
     handleChange(event) {
         this.setState({value: event.target.value});
-       
+        var arr = event.target.value.split('');
+        for (var i = 0; i < arr.length; ++i) {
+            var index = this.state.words.indexOf(arr[i]);
+            if (index !== i) {
+                this.setState({words_color: 'red'});
+            }
+        }
     }
 
     handleSubmit(event) {
@@ -31,7 +38,7 @@ class TypeText extends Component {
     render() {
         return (
             <div>
-                <p>{this.state.words}</p>
+                <p style={{ color: this.state.words_color}}>{this.state.words}</p>
             <form onSubmit={this.handleSubmit}>
                 <input type='text' id='type' value={this.state.value}
                 onChange={this.handleChange}></input>
