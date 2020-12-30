@@ -16,11 +16,18 @@ class TypeText extends Component {
     handleChange(event) {
         this.setState({value: event.target.value});
         var arr = event.target.value.split('');
+        var match = true;
+        console.log(arr);
         for (var i = 0; i < arr.length; ++i) {
             var index = this.state.words.indexOf(arr[i]);
             if (index !== i) {
+                match = false;
                 this.setState({words_color: 'red'});
             }
+        }
+
+        if (match === true) {
+            this.setState({words_color: 'black'});
         }
     }
 
