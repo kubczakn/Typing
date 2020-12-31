@@ -14,6 +14,15 @@ class TypeText extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    createText() {
+        var text = [];
+        for (var i = 0; i < this.state.col_arr.length; ++i) {
+            text.push( <p style={{color: this.state.col_arr[i]}}>{this.state.words_arr[i]}</p>)
+        }
+        console.log(text);
+        return text;
+    }
+
     handleChange(event) {
         this.setState({value: event.target.value});
         var arr = event.target.value.split('');
@@ -40,13 +49,8 @@ class TypeText extends Component {
     render() {
         return (
             <div>
-                <div class='box'>
-                    <p style={{color: this.state.col_arr[0]}}>{this.state.words_arr[0]}</p>
-                    <p style={{color: this.state.col_arr[1]}}>{this.state.words_arr[1]}</p>
-                    <p style={{color: this.state.col_arr[2]}}>{this.state.words_arr[2]}</p>
-                    <p style={{color: this.state.col_arr[3]}}>{this.state.words_arr[3]}</p>
-                    <p style={{color: this.state.col_arr[4]}}>{this.state.words_arr[4]}</p>
-                    <p style={{color: this.state.col_arr[5]}}>{this.state.words_arr[5]}</p>
+                <div className='box'>
+                   {this.createText()}
                 </div>
             <form onSubmit={this.handleSubmit}>
                 <input type='text' id='type' value={this.state.value}
