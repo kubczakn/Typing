@@ -1,11 +1,12 @@
 import React, {Component} from 'react'
+import './type.css'
 
 class TypeText extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            words: "Sample",
-            words_color: 'black',
+            words_arr: "Sample".split(''),
+            col_arr: Array(6).fill('black'),
             value: ""
         };
 
@@ -16,19 +17,13 @@ class TypeText extends Component {
     handleChange(event) {
         this.setState({value: event.target.value});
         var arr = event.target.value.split('');
-        var match = true;
-        console.log(arr);
+        var col = Array(6).fill('black');
         for (var i = 0; i < arr.length; ++i) {
-            var index = this.state.words.indexOf(arr[i]);
-            if (index !== i) {
-                match = false;
-                this.setState({words_color: 'red'});
+            if (this.state.words_arr[i] !== arr[i]) {
+                col[i] = 'red';
             }
         }
-
-        if (match === true) {
-            this.setState({words_color: 'black'});
-        }
+        this.setState({col_arr: col})
     }
 
     handleSubmit(event) {
@@ -45,7 +40,14 @@ class TypeText extends Component {
     render() {
         return (
             <div>
-                <p style={{ color: this.state.words_color}}>{this.state.words}</p>
+                <div class='box'>
+                    <p style={{color: this.state.col_arr[0]}}>{this.state.words_arr[0]}</p>
+                    <p style={{color: this.state.col_arr[1]}}>{this.state.words_arr[1]}</p>
+                    <p style={{color: this.state.col_arr[2]}}>{this.state.words_arr[2]}</p>
+                    <p style={{color: this.state.col_arr[3]}}>{this.state.words_arr[3]}</p>
+                    <p style={{color: this.state.col_arr[4]}}>{this.state.words_arr[4]}</p>
+                    <p style={{color: this.state.col_arr[5]}}>{this.state.words_arr[5]}</p>
+                </div>
             <form onSubmit={this.handleSubmit}>
                 <input type='text' id='type' value={this.state.value}
                 onChange={this.handleChange}></input>
