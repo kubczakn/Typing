@@ -1,12 +1,14 @@
 import React, {Component} from 'react'
 import './type.css'
 
+const movieQuotes = require('movie-quotes');
+
 class TypeText extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            words_arr: "Sample".split(''),
-            col_arr: Array(6).fill('black'),
+            words_arr: movieQuotes.random().replace(/["]+/g, '').split(''),
+            col_arr: [],
             value: ""
         };
 
@@ -16,17 +18,26 @@ class TypeText extends Component {
 
     createText() {
         var text = [];
-        for (var i = 0; i < this.state.col_arr.length; ++i) {
-            text.push( <p style={{color: this.state.col_arr[i]}}>{this.state.words_arr[i]}</p>)
+        console.log(this.state.words_arr);
+        if (this.state.col_arr.length < 1) {
+            for (var i = 0; i < this.state.words_arr.length; ++i) {
+                text.push( <p>{this.state.words_arr[i]}</p>)
+            }
         }
-        console.log(text);
+
+        else {
+            for (var i = 0; i < this.state.col_arr.length; ++i) {
+                text.push( <p style={{color: this.state.col_arr[i]}}>{this.state.words_arr[i]}</p>)
+            }
+        }
+
         return text;
     }
 
     handleChange(event) {
         this.setState({value: event.target.value});
         var arr = event.target.value.split('');
-        var col = Array(6).fill('black');
+        var col = Array(this.state.words_arr.length).fill('black');
         for (var i = 0; i < arr.length; ++i) {
             if (this.state.words_arr[i] !== arr[i]) {
                 col[i] = 'red';
