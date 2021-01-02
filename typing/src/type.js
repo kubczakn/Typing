@@ -14,7 +14,15 @@ class TypeText extends Component {
         };
 
         this.handleChange = this.handleChange.bind(this);
-        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    showBox() {
+        if (!this.state.correct) {
+            return (
+                <input type='text' id='type' value={this.state.value}
+                onChange={this.handleChange}></input>
+            )
+        }
     }
 
     createText() {
@@ -41,6 +49,7 @@ class TypeText extends Component {
     }
 
     handleChange(event) {
+
         this.setState({value: event.target.value});
         var arr = event.target.value.split('');
         var col = Array(this.state.words_arr.length).fill('black');
@@ -56,17 +65,6 @@ class TypeText extends Component {
         }
         this.setState({col_arr: col})
     }
-
-    handleSubmit(event) {
-        if (this.state.value === this.state.words) {
-            this.setState({words: 'correct'})
-        }
-        else {
-            this.setState({words: 'incorrect'})
-        }
-        this.setState({value: ""});
-        event.preventDefault();
-    }
     
     render() {
         return (
@@ -74,12 +72,11 @@ class TypeText extends Component {
                 <div className='box'>
                    {this.createText()}
                 </div>
-            <form onSubmit={this.handleSubmit}>
-                <input type='text' id='type' value={this.state.value}
-                onChange={this.handleChange}></input>
+                <div>
+                    {this.showBox()}
+                </div>
                 <br></br>
-                <input type='submit' value="Submit" ></input>
-            </form>
+                <button onClick={() => window.location.reload(true)}>Reset</button>
             </div>
         )
     };
