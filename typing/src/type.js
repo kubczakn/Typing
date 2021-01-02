@@ -19,8 +19,8 @@ class TypeText extends Component {
     showBox() {
         if (!this.state.correct) {
             return (
-                <input type='text' id='type' value={this.state.value}
-                onChange={this.handleChange}></input>
+                <textarea type='text' id='type' value={this.state.value}
+                onChange={this.handleChange}></textarea>
             )
         }
     }
@@ -72,7 +72,7 @@ class TypeText extends Component {
                 <div className='box'>
                    {this.createText()}
                 </div>
-                <div>
+                <div className='textBox'>
                     {this.showBox()}
                 </div>
                 <br></br>
