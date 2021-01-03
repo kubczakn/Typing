@@ -45,7 +45,7 @@ class TypeText extends Component {
             var seconds = this.state.numSeconds;
             var kpm = keys / (seconds / 60);
             clearInterval(this.interval);
-            text.push( <p>Keys per second: {kpm}</p>)
+            text.push( <p>Keys per minute: {kpm}</p>)
         }
 
         else {
