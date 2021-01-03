@@ -1,7 +1,8 @@
-import React, {Component} from 'react'
+import React, {Component, useEffect} from 'react'
 import './type.css'
 
 const movieQuotes = require('movie-quotes');
+
 
 class TypeText extends Component {
     constructor(props) {
@@ -10,10 +11,21 @@ class TypeText extends Component {
             words_arr: movieQuotes.random().replace(/["]+/g, '').split(''),
             col_arr: [],
             value: "",
-            correct: false
+            correct: false,
+            numSeconds: 0,
+            interval: null
         };
 
         this.handleChange = this.handleChange.bind(this);
+        this.incrementSeconds = this.incrementSeconds.bind(this);
+    }
+
+    incrementSeconds() {
+        this.setState({numSeconds: this.state.numSeconds + 1});
+    }
+
+    componentDidMount() {
+        this.interval = setInterval(this.incrementSeconds, 1000);
     }
 
     showBox() {
@@ -27,8 +39,13 @@ class TypeText extends Component {
 
     createText() {
         var text = [];
+       
         if (this.state.correct) {
-            text.push( <p>Words per minute:</p>)
+            var keys = this.state.words_arr.length;
+            var seconds = this.state.numSeconds;
+            var kpm = keys / (seconds / 60);
+            clearInterval(this.interval);
+            text.push( <p>Keys per second: {kpm}</p>)
         }
 
         else {
@@ -43,7 +60,8 @@ class TypeText extends Component {
                     text.push( <p style={{color: this.state.col_arr[i]}}>{this.state.words_arr[i]}</p>)
                 }
             }
-        }     
+        } 
+        
 
         return text;
     }
@@ -71,6 +89,7 @@ class TypeText extends Component {
             <div>
                 <div className='box'>
                    {this.createText()}
+                  
                 </div>
                 <div className='textBox'>
                     {this.showBox()}
