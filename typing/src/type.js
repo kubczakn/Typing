@@ -32,7 +32,7 @@ class TypeText extends Component {
         if (!this.state.correct) {
             return (
                 <textarea type='text' id='type' value={this.state.value}
-                onChange={this.handleChange}></textarea>
+                onChange={this.handleChange} autoFocus></textarea>
             )
         }
     }
@@ -43,7 +43,7 @@ class TypeText extends Component {
         if (this.state.correct) {
             var keys = this.state.words_arr.length;
             var seconds = this.state.numSeconds;
-            var kpm = keys / (seconds / 60);
+            var kpm = Math.round(keys / (seconds / 60));
             clearInterval(this.interval);
             text.push( <p>Keys per minute: {kpm}</p>)
         }
@@ -105,7 +105,7 @@ class Game extends Component {
     render() {
         return (
             <div>
-                <h1>Type Battle</h1>
+                <h1>Typing Turtle</h1>
                 <TypeText />
             </div>
         )       

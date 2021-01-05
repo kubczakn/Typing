@@ -13,7 +13,16 @@
 
   textarea {
     width: 600px;
-    height: 300px;
+    height: 260px;
+  }
+
+  h1 {
+    font-size: 40px;
+  }
+
+  p, textarea, button {
+    font-size: 20px;
+    font-weight: bolder;
   }
 
   

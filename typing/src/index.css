@@ -12,4 +12,12 @@ code {
     monospace;
 }
 
+body, html {
+  background-image: url("/src/images/turtle-background.jpg");
 
+  height: 100%;
+
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
